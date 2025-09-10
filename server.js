@@ -28,18 +28,6 @@ app.get('/beers', async (req, res) => {
   }
 });
 
-// GET /beers/:id - Get a single beer
-app.get('/beers/:id', async (req, res) => {
-  try {
-    const beer = await Beer.findById(req.params.id);
-    if (!beer) {
-      return res.status(404).json({ error: 'Beer not found' });
-    }
-    res.json(beer);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
 
 // GET /beers/random - Get a random beer
 app.get('/beers/random', async (req, res) => {
@@ -116,6 +104,21 @@ app.get('/beers/search', async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
+
+// GET /beers/:id - Get a single beer
+app.get('/beers/:id', async (req, res) => {
+  try {
+    const beer = await Beer.findById(req.params.id);
+    if (!beer) {
+      return res.status(404).json({ error: 'Beer not found' });
+    }
+    res.json(beer);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 
 // Start server
 app.listen(PORT, () => {
